@@ -18,9 +18,9 @@ export default class App extends NextApp {
       <ThemeProvider theme={theme}>
         <Meta
           as={Head}
-          name="Apply to Hack Club" // site name
-          title="Apply to Hack Club" // page title
-          description="Hack Club is a global nonprofit network of high school coding clubs. Apply now to start yours—we’ll provide support, curriculum, community, stickers, and more." // page description
+          name="Assemble" // site name
+          title="Assemble" // page title
+          description="" // page description
           image="https://apply.hackclub.com/card_1.png" // large summary card image URL
           color="#ec3750" // theme color
         />
