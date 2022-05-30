@@ -27,16 +27,56 @@ export default class App extends NextApp {
         <Flag />
         <NProgress color={'#ec3750'} />
         <ForceTheme theme="light" />
-        <Component {...pageProps} />
+        <div
+          style={{
+            position: 'relative',
+            top: 0,
+            left: 0,
+            height: '100vh',
+            width: '100vw'
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              zIndex: 1,
+              minHeight: '100vh',
+              width: '100vw',
+              background: 'rgba(0,0,10, 0.8)'
+            }}
+          >
+            <Component {...pageProps} />
+          </div>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            duration={2000}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 'auto !important',
+              width: '100vw !important',
+              zIndex: -1
+            }}
+          >
+            <source src="https://stream.mux.com/dTJ01wpc7pKN84IZXzP02LipW6t00tr01U00sQJX00wuGSriE" />
+          </video>
+        </div>
         <style>
-        {`
+          {`
           @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
           * {
             box-sizing: border-box;
           }
         `}
-      </style>
+        </style>
       </ThemeProvider>
     )
   }

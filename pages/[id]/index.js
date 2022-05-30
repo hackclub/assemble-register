@@ -50,7 +50,7 @@ export default function Home({ notFound, params, registrationRecord }) {
             </>
           )}
         </Heading>
-        <Link href={`/${params.id}/register`}>
+        <Link href={`/${params.id}/register`} replace={false} basePath={false}>
           <Flex
             sx={{
               mt: 5,
