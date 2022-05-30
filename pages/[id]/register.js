@@ -93,11 +93,6 @@ export default function Register({ notFound, registrationRecord, params }) {
         <Box sx={{ display: ['block', 'flex'], alignItems: 'center' }}>
           <Flex sx={{ alignItems: 'center', flexGrow: 1 }}>
             <Text
-              sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-            >
-              <Icon glyph="home" onClick={() => goHome(false)} />
-            </Text>
-            <Text
               variant="subheadline"
               sx={{ fontWeight: 400, mb: 0, flexGrow: 1, ml: 2 }}
               as="div"
@@ -133,24 +128,20 @@ export default function Register({ notFound, registrationRecord, params }) {
                 mr: 2,
                 fontWeight: '800',
                 textTransform: 'uppercase',
-                bg: saved ? '#33d6a6' : '#ff8c37',
+                bg: saved ? 'green' : 'orange',
                 ':hover,:focus': saved ? { transform: 'none' } : {}
               }}
             >
               {saved ? 'SAVED' : 'SAVE'}
             </Button>
-            <Icon
-              glyph={saved ? 'checkmark' : 'important'}
-              color={saved ? '#33d6a6' : '#ff8c37'}
-            />
           </Box>
         </Box>
       </Card>
       <Card px={[4, 4]} py={[4, 4]} mt={4}>
-        {(params.type == 'club' ? manifest.clubs : manifest.questions).map(
+        {(manifest.questions).map(
           (sectionItem, sectionIndex) => (
             <Box key={sectionIndex}>
-              <Box sx={{ textAlign: 'left' }}>
+              <Box sx={{ textAlign: 'left', mb: 2 }}>
                 <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
                   {sectionItem['header']}
                 </Text>
@@ -169,7 +160,7 @@ export default function Register({ notFound, registrationRecord, params }) {
                   >
                     <Field
                       label={
-                        <Text>
+                        <Text mb={2}>
                           {item['label']}{' '}
                           <Text
                             sx={{
@@ -252,7 +243,7 @@ export default function Register({ notFound, registrationRecord, params }) {
         )}
         <Button
           sx={{
-            mt: 3,
+            mt: 2,
             width: '100%',
             textTransform: 'uppercase'
           }}

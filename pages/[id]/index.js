@@ -14,6 +14,7 @@ import {
 import Icon from '@hackclub/icons'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import theme from '../../lib/theme'
 import { useRouter } from 'next/router'
 import nookies, { destroyCookie } from 'nookies'
 
@@ -49,17 +50,18 @@ export default function Home({ notFound, params, registrationRecord }) {
             </>
           )}
         </Heading>
-        <Divider sx={{ color: 'slate', my: [3, 4] }} />
         <Link href={`/${params.id}/register`}>
           <Flex
             sx={{
+              mt: 5,
+              mb: 4,
               alignItems: 'center',
               cursor: 'pointer',
               '> svg': { display: ['none', 'inline'] }
             }}
           >
             {registrationRecord.fields['Completed'] == 1 ? (
-              <Icon glyph="checkmark" color="#33d6a6" />
+              <Icon glyph="checkmark" color={theme.colors.green} />
             ) : (
               <Icon glyph="important" color="#ff8c37" />
             )}
@@ -80,13 +82,12 @@ export default function Home({ notFound, params, registrationRecord }) {
             <Icon glyph="view-forward" />
           </Flex>
         </Link>
-        <Divider sx={{ color: 'slate', my: [3, 4] }} />
         <Button
           sx={{
             mt: 1,
             width: '100%',
             textTransform: 'uppercase',
-            bg: 'muted'
+            bg: 'gray'
           }}
           variant="lg"
           onClick={async () => {
@@ -118,7 +119,7 @@ const ContactCard = ({ router }) => (
   >
     <Icon glyph="message" />
     <Text sx={{ ml: 2 }}>
-      Please don’t hesitate to reach out. We’re available to email at{' '}
+      Please don’t hesitate to reach out. We’re available at{' '}
       <b>
         <Text
           as="a"
