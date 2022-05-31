@@ -17,7 +17,6 @@ export default async function handler(req, res) {
       res.redirect('/')
       return
     }
-
     const requestBody = JSON.parse(req.body);
     const template = manifest.questions;
     const newData = template
@@ -30,15 +29,10 @@ export default async function handler(req, res) {
         if (!optional && (requestBody[key] === undefined || requestBody[key].trim() === "")) {
           acc.Completed = false; 
         }
-
         return acc;
       }, { Completed: true });
-
-
-
     const table = registrationsAirtable;
     const updateCall = await table.update('rec'+ req.query.id, newData);
-
     res.status(200).json({ success: true, id: updateCall.id, newData })
   } catch (error) {
     console.log(error)
