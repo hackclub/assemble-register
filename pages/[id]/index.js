@@ -51,8 +51,10 @@ export default function Home({ notFound, params, registrationRecord }) {
             </>
           )}
         </Heading>
-        {registrationRecord.fields['Completed'] == 1 && (
-          <Image src={`https://barcode.tec-it.com/barcode.ashx?data=${registrationRecord.id}&code=Code128&translate-esc=true&dmsize=Default`} />
+        {registrationRecord.fields['Completed'] == 1 && 
+          <Image 
+            src={'https://barcode.tec-it.com/barcode.ashx?data=' + registrationRecord.id +'code=Code128&translate-esc=true&dmsize=Default'} 
+          />
         }
         <Link href={`/${params.id}/register`} replace={false} basePath={false}>
           <Flex
