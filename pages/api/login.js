@@ -7,7 +7,6 @@ export default async function handler(req, res) {
       maxRecords: 1,
       filterByFormula: `Email = "${decodeURIComponent(req.query.email)}"`
     })
-
     if (firstAirtableCall.length > 0) {
       const registrationRecord = firstAirtableCall[0]
       const loginRecord = await loginsAirtable.create({
