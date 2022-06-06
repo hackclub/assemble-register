@@ -1,3 +1,5 @@
+import { getAge } from './lib/helpers'
+
 export default {
   questions: [
     {
@@ -46,6 +48,25 @@ export default {
           label: 'Do you have any dietary restrictions? Please list them here.',
           type: 'paragraph',
           optional: true
+        }
+      ]
+    },
+    {
+      header: 'Guardian Details',
+      label: `Please provide us with the details of a parent/guardian. We'll contact them with a consent form and a participant waiver.`,
+      check: (data) => data['Birthday'] === undefined || getAge(data['Birthday']) > 17,
+      items: [
+        {
+          key: 'Parent Name',
+          label: "What's your guardian's name?",
+          type: 'string',
+          optional: false
+        },
+        {
+          key: 'Parent Email',
+          label: "What's your guardian's email?",
+          type: 'string',
+          optional: false
         }
       ]
     },

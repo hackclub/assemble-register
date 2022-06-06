@@ -141,124 +141,134 @@ export default function Register({ notFound, registrationRecord, params }) {
           <a href="mailto:assemble@hackclub.com">assemble@hackclub.com</a> for
           help!
         </Box>
-        {manifest.questions.map((sectionItem, sectionIndex) => (
-          <Box key={sectionIndex}>
-            <Box sx={{ textAlign: 'left', mb: 2 }}>
-              <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
-                {sectionItem['header']}
-              </Text>
-            </Box>
-            <Box>
-              {sectionItem.label && (
-                <Box sx={{ color: 'muted', mb: 3 }}>{sectionItem['label']}</Box>
-              )}
-              {sectionItem.items.map((item, index) => {
-                if (typeof item.check != 'undefined') {
-                  if (item.check(data)) {
-                    return null
+        {manifest.questions.map((sectionItem, sectionIndex) => {
+          if (typeof sectionItem.check != 'undefined') {
+            if (sectionItem.check(data)) {
+              return null
+            }
+          }
+          return (
+            <Box key={sectionIndex}>
+              <Box sx={{ textAlign: 'left', mb: 2 }}>
+                <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
+                  {sectionItem['header']}
+                </Text>
+              </Box>
+              <Box>
+                {sectionItem.label && (
+                  <Box sx={{ color: 'muted', mb: 3 }}>
+                    {sectionItem['label']}
+                  </Box>
+                )}
+                {sectionItem.items.map((item, index) => {
+                  if (typeof item.check != 'undefined') {
+                    if (item.check(data)) {
+                      return null
+                    }
                   }
-                }
-                return (
-                  <Box
-                    mt={1}
-                    mb={3}
-                    key={'form-item-' + sectionIndex + '-' + index}
-                  >
-                    <Field
-                      label={
-                        <Text
-                          mb={2}
-                          sx={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px'
-                          }}
-                        >
-                          {item['label']}{' '}
+                  return (
+                    <Box
+                      mt={1}
+                      mb={3}
+                      key={'form-item-' + sectionIndex + '-' + index}
+                    >
+                      <Field
+                        label={
                           <Text
-                            as="small"
+                            mb={2}
                             sx={{
-                              color: 'muted',
-                              display: item.optional ? 'inline' : 'none',
-                              fontSize: '13px'
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '8px'
                             }}
                           >
-                            (Optional)
+                            {item['label']}{' '}
+                            <Text
+                              as="small"
+                              sx={{
+                                color: 'muted',
+                                display: item.optional ? 'inline' : 'none',
+                                fontSize: '13px'
+                              }}
+                            >
+                              (Optional)
+                            </Text>
                           </Text>
+                        }
+                        onChange={e => {
+                          let newData = {}
+                          newData[item.key] = e.target.value
+                          setData({ ...data, ...newData })
+                          setSaved(false)
+                        }}
+                        placeholder={item['placeholder']}
+                        as={
+                          item.type == 'string'
+                            ? Input
+                            : item.type == 'paragraph'
+                            ? Textarea
+                            : Select
+                        }
+                        type={item.inputType}
+                        value={
+                          data[item.key] !== undefined ? data[item.key] : ''
+                        }
+                        sx={{
+                          border: '1px solid',
+                          borderColor: 'rgb(221, 225, 228)',
+                          resize: 'vertical'
+                        }}
+                        {...(item.type == 'select'
+                          ? item.options
+                            ? {
+                                children: (
+                                  <>
+                                    <option value="" disabled>
+                                      Select One
+                                    </option>
+                                    {item['options'].map(option => (
+                                      <option key={option}>{option}</option>
+                                    ))}
+                                  </>
+                                )
+                              }
+                            : {
+                                children: <></>
+                              }
+                          : {})}
+                      />
+                      {item.words && (
+                        <Text
+                          sx={{ fontSize: '18px', color: 'muted', mt: 1 }}
+                          as="p"
+                        >
+                          ( Aim for about {item.words} words
+                          {data[item.key] &&
+                          ', ' +
+                            data[item.key].split(' ').length +
+                            ' ' +
+                            data[item.key].split(' ').length ==
+                            1
+                            ? 'word'
+                            : 'words' + ' ' + 'so far.'}
+                          )
                         </Text>
-                      }
-                      onChange={e => {
-                        let newData = {}
-                        newData[item.key] = e.target.value
-                        setData({ ...data, ...newData })
-                        setSaved(false)
-                      }}
-                      placeholder={item['placeholder']}
-                      as={
-                        item.type == 'string'
-                          ? Input
-                          : item.type == 'paragraph'
-                          ? Textarea
-                          : Select
-                      }
-                      type={item.inputType}
-                      name="email"
-                      value={data[item.key] !== undefined ? data[item.key] : ''}
-                      sx={{
-                        border: '1px solid',
-                        borderColor: 'rgb(221, 225, 228)',
-                        resize: 'vertical'
-                      }}
-                      {...(item.type == 'select'
-                        ? item.options
-                          ? {
-                              children: (
-                                <>
-                                  <option value="" disabled>
-                                    Select One
-                                  </option>
-                                  {item['options'].map(option => (
-                                    <option key={option}>{option}</option>
-                                  ))}
-                                </>
-                              )
-                            }
-                          : {
-                              children: <></>
-                            }
-                        : {})}
-                    />
-                    {item.words && (
-                      <Text
-                        sx={{ fontSize: '18px', color: 'muted', mt: 1 }}
-                        as="p"
-                      >
-                        ( Aim for about {item.words} words
-                        {data[item.key] &&
-                        ', ' +
-                          data[item.key].split(' ').length +
-                          ' ' +
-                          data[item.key].split(' ').length ==
-                          1
-                          ? 'word'
-                          : 'words' + ' ' + 'so far.'}
-                        )
-                      </Text>
-                    )}
-                    {item.sublabel && (
-                      <Text
-                        sx={{ fontSize: '16px', color: 'muted', mt: 2 }}
-                        as="p"
-                      >
-                        {item['sublabel']}
-                      </Text>
-                    )}
-                  </Box>
-                )
-              })}
+                      )}
+                      {item.sublabel && (
+                        <Text
+                          sx={{ fontSize: '16px', color: 'muted', mt: 2 }}
+                          as="p"
+                        >
+                          {item['sublabel']}
+                        </Text>
+                      )}
+                    </Box>
+                  )
+                })}
+              </Box>
             </Box>
-          </Box>
-        ))}
+          )
+        })}
         <Button
           sx={{
             mt: 2,
@@ -277,7 +287,7 @@ export default function Register({ notFound, registrationRecord, params }) {
   )
 }
 
-const SavedInfo = ({ saved, poster, router }) => (
+const SavedInfo = ({ saved, poster }) => (
   <Box
     sx={{
       display: ['none', 'flex'],
