@@ -29,16 +29,13 @@ export default function Register({ notFound, registrationRecord, params }) {
     savingStateRef.current = data
     setSavedState(data)
   }
-  let keys = manifest.questions.flatMap(x => x.items.map(y=> y.key))
+  let keys = manifest.questions.flatMap(x => x.items.map(y => y.key))
 
   const poster = async () => {
     const id = params.id
 
     const msg = { body: JSON.stringify(data), method: 'POST' }
-    const fetched = await fetch(
-      `/api/${params.type}/save?id=${id}`,
-      msg
-    )
+    const fetched = await fetch(`/api/${params.type}/save?id=${id}`, msg)
     const json = await fetched.json()
 
     if (json.success) {
@@ -107,7 +104,6 @@ export default function Register({ notFound, registrationRecord, params }) {
               >
                 Assemble
               </Text>
-
               {' / '}
               <b>Register</b>
             </Text>
@@ -138,21 +134,31 @@ export default function Register({ notFound, registrationRecord, params }) {
         </Box>
       </Card>
       <Card px={[4, 4]} py={[4, 4]} mt={4}>
-        {(manifest.questions).map(
-          (sectionItem, sectionIndex) => (
-            <Box key={sectionIndex}>
-              <Box sx={{ textAlign: 'left', mb: 2 }}>
-                <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
-                  {sectionItem['header']}
-                </Text>
-              </Box>
-              <Box>
-                {sectionItem.label && (
-                  <Box sx={{ color: 'muted', mb: 3 }}>
-                    {sectionItem['label']}
-                  </Box>
-                )}
-                {sectionItem.items.map((item, index) => (
+        <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
+          👋 Hello! We're so excited to meet you at Assemble this summer. Please
+          fill out the registration form below to help us make the event magical
+          for you. Feel free to contact{' '}
+          <a href="mailto:assemble@hackclub.com">assemble@hackclub.com</a> for
+          help!
+        </Box>
+        {manifest.questions.map((sectionItem, sectionIndex) => (
+          <Box key={sectionIndex}>
+            <Box sx={{ textAlign: 'left', mb: 2 }}>
+              <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
+                {sectionItem['header']}
+              </Text>
+            </Box>
+            <Box>
+              {sectionItem.label && (
+                <Box sx={{ color: 'muted', mb: 3 }}>{sectionItem['label']}</Box>
+              )}
+              {sectionItem.items.map((item, index) => {
+                if (typeof item.check != 'undefined') {
+                  if (item.check(data)) {
+                    return null
+                  }
+                }
+                return (
                   <Box
                     mt={1}
                     mb={3}
@@ -160,10 +166,17 @@ export default function Register({ notFound, registrationRecord, params }) {
                   >
                     <Field
                       label={
-                        <Text mb={2} sx={{display: 'inline-flex', alignItems: 'center', gap: '8px'}}>
+                        <Text
+                          mb={2}
+                          sx={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px'
+                          }}
+                        >
                           {item['label']}{' '}
                           <Text
-                          as="small"
+                            as="small"
                             sx={{
                               color: 'muted',
                               display: item.optional ? 'inline' : 'none',
@@ -233,16 +246,19 @@ export default function Register({ notFound, registrationRecord, params }) {
                       </Text>
                     )}
                     {item.sublabel && (
-                      <Text sx={{ fontSize: '16px', color: 'muted' }} as="p">
+                      <Text
+                        sx={{ fontSize: '16px', color: 'muted', mt: 2 }}
+                        as="p"
+                      >
                         {item['sublabel']}
                       </Text>
                     )}
                   </Box>
-                ))}
-              </Box>
+                )
+              })}
             </Box>
-          )
-        )}
+          </Box>
+        ))}
         <Button
           sx={{
             mt: 2,
@@ -252,7 +268,9 @@ export default function Register({ notFound, registrationRecord, params }) {
           variant="ctaLg"
           onClick={() => goHome(true)}
         >
-         {keys.every(x=>Object.keys(data).includes(x)) ? 'Register' : 'Save Your Progress'}  
+          {keys.every(x => Object.keys(data).includes(x))
+            ? 'Register'
+            : 'Save Your Progress'}
         </Button>
       </Card>
     </Container>
@@ -298,7 +316,9 @@ export async function getServerSideProps({ res, req, params }) {
       const registrationRecord = await registrationsAirtable.find(
         'rec' + params.id
       )
-      if (registrationRecord.fields['Accepted Tokens'].includes(cookies.authToken)) {
+      if (
+        registrationRecord.fields['Accepted Tokens'].includes(cookies.authToken)
+      ) {
         return { props: { params, registrationRecord } }
       } else {
         res.statusCode = 302

@@ -19,14 +19,26 @@ export default {
         {
           key: 'Shirt',
           label: 'Shirt Size',
-          type: 'string',
+          type: 'select',
+          options: [
+            'Extra-Small',
+            'Small',
+            'Medium',
+            'Large',
+            'Extra Large'
+          ],
           optional: false
         },
         {
-          key: 'Shirt',
+          key: 'Skill Level',
           label: 'How would you describe your technical skills?',
           sublabel: `Everyone's welcome! This question is just to help us gauge what resources we need to support attendees.`,
-          type: 'string',
+          type: 'select',
+          options: [
+            'Beginner: have never coded before or just started learning',
+            'Intermediate: I have taken cs classes OR worked on small individual projects',
+            'Advanced: I’m comfortable with my skill set and can work on a project without much guidance'
+          ],
           optional: false
         },
         {
@@ -42,17 +54,20 @@ export default {
       label: `At Assemble, attendees will host their own informal workshops!`,
       items: [
         {
-          key: 'Full Name',
+          key: 'Workshop Host',
           label: 'Would you be interested in hosting a session?',
-          type: 'string',
+          type: 'select',
+          options: ['Yes', 'No'],
           optional: false
         },
         {
-          key: 'Your Nearest Airport',
+          key: 'Workshop Topic',
           label: 'Awesome! What do you think you would like to talk about?',
-          sublabel: 'This question is not a commitment! You can choose to change your topic or not present at any time.',
-          type: 'string',
-          optional: false
+          sublabel:
+            'This question is not a commitment! You can choose to change your topic or not present at any time.',
+          type: 'paragraph',
+          optional: false,
+          check: (data) => data['Workshop Host'] == "No" || data['Workshop Host'] === undefined
         }
       ]
     },
@@ -61,16 +76,18 @@ export default {
       label: `We're offering a limited number of $500 stipends to cover travel expenses for those who need it to be able to make the event. Unfortunately, we can't guarantee a travel stipend.`,
       items: [
         {
-          key: 'Full Name',
-          label: 'Do you need a flight stipend?',
-          type: 'string',
+          key: 'Travel Stipend',
+          label: 'Do you need a travel stipend?',
+          type: 'select',
+          options: ['Yes', 'No'],
           optional: false
         },
         {
           key: 'Your Nearest Airport',
-          label: 'Your Nearest Airport',
+          label: 'What is your nearest airport?',
           type: 'string',
-          optional: false
+          optional: false,
+          check: (data) => data['Travel Stipend'] == "No" || data['Travel Stipend'] === undefined
         }
       ]
     },
@@ -78,15 +95,17 @@ export default {
       header: 'The Most Important Questions',
       items: [
         {
-          key: 'Full Name',
+          key: 'Tabs or Spaces',
           label: 'Tabs vs. Spaces?',
-          type: 'string',
+          type: 'select',
+          options: ['Tabs', 'Spaces', 'No Indent 😎'],
           optional: false
         },
         {
-          key: 'Your Nearest Airport',
+          key: 'Pineapple on Pizza',
           label: 'Pineapple on pizza, yes or no?',
-          type: 'string',
+          type: 'select',
+          options: ['Yes!', 'No...why?'],
           optional: false
         }
       ]
