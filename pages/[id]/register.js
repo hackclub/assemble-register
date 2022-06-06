@@ -160,15 +160,17 @@ export default function Register({ notFound, registrationRecord, params }) {
                   >
                     <Field
                       label={
-                        <Text mb={2}>
+                        <Text mb={2} sx={{display: 'inline-flex', alignItems: 'center', gap: '8px'}}>
                           {item['label']}{' '}
                           <Text
+                          as="small"
                             sx={{
                               color: 'muted',
-                              display: item.optional ? 'inline' : 'none'
+                              display: item.optional ? 'inline' : 'none',
+                              fontSize: '13px'
                             }}
                           >
-                            (Optional )
+                            (Optional)
                           </Text>
                         </Text>
                       }

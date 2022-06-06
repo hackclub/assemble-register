@@ -41,9 +41,10 @@ export default class App extends NextApp {
               top: 0,
               left: 0,
               zIndex: 1,
-              minHeight: '100vh',
+              height: '100vh',
               width: '100vw',
-              background: 'rgba(0,0,10, 0.8)'
+              background: 'rgba(0,0,10, 0.8)',
+              overflowY: 'scroll'
             }}
           >
             <Component {...pageProps} />
