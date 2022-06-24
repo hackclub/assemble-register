@@ -6,7 +6,7 @@
 
 ```
 git clone https://github.com/hackclub/www-assemble-register.git
-cd apply
+cd www-assemble-register
 ```
 
 2. Install packages & run
