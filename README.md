@@ -5,7 +5,7 @@
 1. Clone the repository and enter it
 
 ```
-git clone https://github.com/hackclub/apply.git
+git clone https://github.com/hackclub/www-assemble-register.git
 cd apply
 ```
 
