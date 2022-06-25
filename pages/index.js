@@ -195,6 +195,7 @@ export default function Register({ notFound, registrationRecord, params }) {
                             : Select
                         }
                         type={item.inputType}
+                        required={!item.optional}
                         value={
                           data[item.key] !== undefined ? data[item.key] : ''
                         }
