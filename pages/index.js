@@ -56,7 +56,7 @@ export default function Register({ notFound, registrationRecord, params }) {
               }}
               as="div"
             >
-              Register for{' '}
+              Join Us At{' '}
               <Text
                 sx={{
                   textDecoration: 'none',
@@ -67,6 +67,7 @@ export default function Register({ notFound, registrationRecord, params }) {
               >
                 Assemble
               </Text>
+              2022!
             </Text>
           </Flex>
           <Box

@@ -17,8 +17,8 @@ export default class App extends NextApp {
       <ThemeProvider theme={theme}>
         <Meta
           as={Head}
-          name="Assemble" // site name
-          title="Assemble" // page title
+          name="Join Us At Assemble 2022!" // site name
+          title="Join Us At Assemble 2022!" // page title
           description="" // page description
           image="https://apply.hackclub.com/card_1.png" // large summary card image URL
           color="#ec3750" // theme color
