@@ -29,12 +29,23 @@ export default function Register({ notFound, registrationRecord, params }) {
         }}
       >
         <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
-          Thanks for registering!
+          Thank you for signing up!
         </Text>
         <br />
-        <Text>❤️ Thank you for signing up, we're really excited to meet you! Make sure you check your email in the coming days and weeks for important updates. Also, check out the <Text as={"a"} href="https://hackclub.com/slack" target="_blank" sx={{ color: 'red'}}>Hack Club Slack</Text> if you'd like to meet other hackers.</Text>
+        <Text>
+          ❤️ We're really excited to meet you! Make sure you check your email in
+          the coming days and weeks for important updates. Also, check out the{' '}
+          <Text
+            as={'a'}
+            href="https://hackclub.com/slack"
+            target="_blank"
+            sx={{ color: 'red' }}
+          >
+            Hack Club Slack
+          </Text>{' '}
+          if you'd like to meet other hackers.
+        </Text>
       </Card>
     </Container>
   )
 }
-
