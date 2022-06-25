@@ -233,7 +233,7 @@ Over the weekend, you’ll explore the Bay Area during your free time, hack with
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-          }).then(response => response.json()).then(console.log);
+          }).then(response => response.json()).then(({ success }) => success && window.location.replace('/success'));
         }}>Submit</Button>
       </Card>
     </Container>
