@@ -1,112 +1,242 @@
-import { Box, Button, Text, Flex, Heading, Input } from 'theme-ui'
-import { useState, useRef, useEffect } from 'react'
+import Error from 'next/error'
+import {
+  Box,
+  Input,
+  Divider,
+  Card,
+  Container,
+  Text,
+  Button,
+  Heading,
+  Flex,
+  Select,
+  Textarea,
+  Field,
+  Grid
+} from 'theme-ui'
+import Icon from '@hackclub/icons'
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+import manifest from '../lib/manifest.js'
 import nookies from 'nookies'
-import {validateEmail } from '../lib/helpers'
 import { useRouter } from 'next/router'
 
-export default function IndexHome() {
+export default function Register({ notFound, registrationRecord, params }) {
+  const [data, setData] = useState({})
+
+  let keys = manifest.questions.flatMap(x => x.items.map(y => y.key))
+
   const router = useRouter()
-  const [status, setStatus] = useState('awaiting')
-  const [email, setEmail] = useState('')
-  async function handleSubmission(e) {
-    e.preventDefault();
-    if (validateEmail(email)) {
-      setStatus('loading')
-      const loginAPICall = await fetch(`/api/login?email=${encodeURIComponent(email)}&locale=${router.locale}`).then(r =>
-        r.json()
-      )
-      if (loginAPICall.success) {
-        if(loginAPICall.url){
-          router.push(loginAPICall.url)
-        }
-        else {
-          setStatus('sent')
-        }
-        
-      } else {
-        setStatus('error')
-      }
-    } else {
-      alert(`❌ Invalid Email Address`)
-    }
+
+  if (notFound) {
+    return <Error statusCode="404" />
   }
   return (
-    <Flex
-      sx={{
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
-      }}
-    >
-      <Box
-        bg="slate"
-        p={4}
-        as="form"
-        onSubmit={handleSubmission}
-        sx={{ borderRadius: 10, width: '100%', maxWidth: '36rem' }}
+    <Container py={4} variant="copy">
+      <Card
+        px={[4, 4]}
+        py={[3, 3]}
+        sx={{
+          color: 'blue',
+          textAlign: 'left'
+        }}
       >
-        <Heading as="h1" sx={{ fontSize: 5 }}>
-        Welcome
-        </Heading>
-        <Text as="p" variant="lead">
-        We can’t wait to see you at Hack Club Assemble. Let’s get you registered!
-        </Text>
-        <Text as="p" variant="lead">
-          {status == 'awaiting'
-            ? 'Enter your email:'
-            : status == 'sent'
-            ? '📬 ' + 'We just sent a login URL to your email'
-            : status == 'loading'
-            ? '✉️ '  +'Preparing...'
-            : '⚠️ '+'Error! Please try again!'}
-        </Text>
-        <Input
-          className="bg"
-          placeholder={'Email address'}
-          onChange={e => setEmail(e.target.value)}
-          sx={{
-            color: 'rgb(56, 64, 70)',
-            display:
-              status == 'awaiting' || status == 'error' ? 'block' : 'none',
-            '::placeholder': {
-              color: 'rgb(56, 64, 70)'
+        <Box sx={{ display: ['block', 'flex'], alignItems: 'center' }}>
+          <Flex sx={{ alignItems: 'center', flexGrow: 1 }}>
+            <Text
+              variant="subheadline"
+              sx={{ fontWeight: 400, mb: 0, flexGrow: 1, ml: 2 }}
+              as="div"
+            >
+              <Text
+                sx={{
+                  textDecoration: 'none',
+                  color: 'blue',
+                  cursor: 'pointer'
+                }}
+                onClick={() => window.open('https://assemble.hackclub.com')}
+              >
+                Assemble
+              </Text>
+              {' / '}
+              <b>Register</b>
+            </Text>
+          </Flex>
+          <Box
+            sx={{
+              alignItems: 'center',
+              display: 'flex',
+              cursor: 'pointer',
+              '> svg': { display: ['none', 'inline'] },
+              mt: [2, 0]
+            }}
+            onClick={() => poster()}
+          >
+          </Box>
+        </Box>
+      </Card>
+      <Card px={[4, 4]} py={[4, 4]} mt={4}>
+        <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
+
+        This summer, we’re going to return in-person high-school hackathons to San Francisco. Our goal is to kick off a new renaissance.
+        <br />
+        <br />
+We invite you to come out and join us. Not through Zoom or Discord, but IRL out in the Golden City from August 5th 6:00pm to August 7th 12:00pm. We’ll be hosted at the fantastic Figma HQ on Market Street in the heart of San Francisco.
+<br />
+<br />
+Over the weekend, you’ll explore the Bay Area during your free time, hack with co-conspirators, solve a murder at midnight, and experience the energy of being in-person again. Together, we’ll Assemble to form the first IRL high school hackathon on this side of the pandemic.
+<br />
+            <br />
+          We're so excited to meet you at Assemble this summer. Please
+          fill out the registration form below to help us make the event magical
+          for you. Feel free to contact{' '}
+          <a href="mailto:assemble@hackclub.com">assemble@hackclub.com</a> for
+          help!
+        </Box>
+        {manifest.questions.map((sectionItem, sectionIndex) => {
+          if (typeof sectionItem.check != 'undefined') {
+            if (sectionItem.check(data)) {
+              return null
             }
-          }}
-        />
-        <Button
-          className="bg"
-          sx={{
-            color: 'black',
-            boxShadow: 'none',
-            textTransform: 'uppercase',
-            mt: 3,
-            display:
-              status == 'awaiting' || status == 'error' ? 'block' : 'none'
-          }}
-        >
-          Continue {'>>'}
-        </Button>
-      </Box>
-    </Flex>
+          }
+          return (
+            <Box key={sectionIndex} sx={{ my: 5 }}>
+              <Box sx={{ textAlign: 'left', mb: 2 }}>
+                <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
+                  {sectionItem['header']}
+                </Text>
+              </Box>
+              <Box>
+                {sectionItem.label && (
+                  <Box sx={{ color: 'muted', mb: 3 }}>
+                    {sectionItem['label']}
+                  </Box>
+                )}
+                {sectionItem.items.map((item, index) => {
+                  if (typeof item.check != 'undefined') {
+                    if (item.check(data)) {
+                      return null
+                    }
+                  }
+                  return (
+                    <Box
+                      mt={1}
+                      mb={4}
+                      key={'form-item-' + sectionIndex + '-' + index}
+                    >
+                      <Field
+                        label={
+                          <>
+                            <Text
+                              mb={1}
+                              sx={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px'
+                              }}
+                            >
+                              {item['label']}{' '}
+                              <Text
+                                as="small"
+                                sx={{
+                                  color: 'muted',
+                                  display: item.optional ? 'inline' : 'none',
+                                  fontSize: '13px'
+                                }}
+                              >
+                                (Optional)
+                              </Text>
+                            </Text>
+                            {item.sublabel && (
+                              <Text
+                                sx={{ fontSize: '15px', color: '#555', fontWeight: '500', mb: 2, fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif` }}
+                                as="p"
+                              >
+                                {item['sublabel']}
+                              </Text>
+                            )}
+                          </>
+                        }
+                        onChange={e => {
+                          let newData = {}
+                          newData[item.key] = e.target.value
+                          setData({ ...data, ...newData })
+                        }}
+                        placeholder={item['placeholder']}
+                        as={
+                          item.type == 'string'
+                            ? Input
+                            : item.type == 'paragraph'
+                            ? Textarea
+                            : item.inputType == 'checkbox'
+                            ? Input
+                            : Select
+                        }
+                        type={item.inputType}
+                        value={
+                          data[item.key] !== undefined ? data[item.key] : ''
+                        }
+                        sx={{
+                          border: '1px solid',
+                          borderColor: 'rgb(221, 225, 228)',
+                          resize: 'vertical',
+                          display: item.inputType == 'checkbox' ? '-webkit-box' : 'block'
+                        }}
+                        {...(item.type == 'select'
+                          ? item.options
+                            ? {
+                                children: (
+                                  <>
+                                    <option value="" disabled>
+                                      Select One
+                                    </option>
+                                    {item['options'].map(option => (
+                                      <option key={option}>{option}</option>
+                                    ))}
+                                  </>
+                                )
+                              }
+                            : {
+                                children: <></>
+                              }
+                          : {})}
+                      />
+                      {item.words && (
+                        <Text
+                          sx={{ fontSize: '18px', color: 'muted', mt: 1 }}
+                          as="p"
+                        >
+                          ( Aim for about {item.words} words
+                          {data[item.key] &&
+                          ', ' +
+                            data[item.key].split(' ').length +
+                            ' ' +
+                            data[item.key].split(' ').length ==
+                            1
+                            ? 'word'
+                            : 'words' + ' ' + 'so far.'}
+                          )
+                        </Text>
+                      )}
+                    </Box>
+                  )
+                })}
+              </Box>
+            </Box>
+          )
+        })}
+        <Button onClick={() => {
+          console.log(data);
+          fetch('/api/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(response => response.json()).then(console.log);
+        }}>Submit</Button>
+      </Card>
+    </Container>
   )
 }
 
-export async function getServerSideProps(ctx) {
-  const { loginsAirtable } = require('../lib/airtable')
-  const cookies = nookies.get(ctx)
-  if (cookies.authToken) {
-    try{
-    const tokenRecord = await loginsAirtable.find(
-      'rec' + cookies.authToken
-    )
-    let res = ctx.res
-    res.statusCode = 302
-    res.setHeader('Location', `${tokenRecord.fields["Path"]}`)
-    }
-    catch{
-      nookies.destroy(ctx, 'authToken')
-    }
-  }
-  return {props: {}}
-}
