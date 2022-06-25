@@ -45,9 +45,18 @@ export default function Register({ notFound, registrationRecord, params }) {
           <Flex sx={{ alignItems: 'center', flexGrow: 1 }}>
             <Text
               variant="subheadline"
-              sx={{ fontWeight: 400, mb: 0, flexGrow: 1, ml: 2 }}
+              sx={{
+                fontWeight: 900,
+                mb: 0,
+                flexGrow: 1,
+                ml: 2,
+                textAlign: 'center',
+                fontSize: 4,
+                textDecoration: 'underline'
+              }}
               as="div"
             >
+              Register for{' '}
               <Text
                 sx={{
                   textDecoration: 'none',
@@ -58,8 +67,6 @@ export default function Register({ notFound, registrationRecord, params }) {
               >
                 Assemble
               </Text>
-              {' / '}
-              <b>Register</b>
             </Text>
           </Flex>
           <Box
@@ -71,25 +78,30 @@ export default function Register({ notFound, registrationRecord, params }) {
               mt: [2, 0]
             }}
             onClick={() => poster()}
-          >
-          </Box>
+          ></Box>
         </Box>
       </Card>
       <Card px={[4, 4]} py={[4, 4]} mt={4}>
         <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
-
-        This summer, we’re going to return in-person high-school hackathons to San Francisco. Our goal is to kick off a new renaissance.
-        <br />
-        <br />
-We invite you to come out and join us. Not through Zoom or Discord, but IRL out in the Golden City from August 5th 6:00pm to August 7th 12:00pm. We’ll be hosted at the fantastic Figma HQ on Market Street in the heart of San Francisco.
-<br />
-<br />
-Over the weekend, you’ll explore the Bay Area during your free time, hack with co-conspirators, solve a murder at midnight, and experience the energy of being in-person again. Together, we’ll Assemble to form the first IRL high school hackathon on this side of the pandemic.
-<br />
-            <br />
-          We're so excited to meet you at Assemble this summer. Please
-          fill out the registration form below to help us make the event magical
-          for you. Feel free to contact{' '}
+          This summer, we’re going to return in-person high-school hackathons to
+          San Francisco. Our goal is to kick off a new renaissance.
+          <br />
+          <br />
+          We invite you to come out and join us. Not through Zoom or Discord,
+          but IRL out in the Golden City from August 5th 6:00pm to August 7th
+          12:00pm. We’ll be hosted at the fantastic Figma HQ on Market Street in
+          the heart of San Francisco.
+          <br />
+          <br />
+          Over the weekend, you’ll explore the Bay Area during your free time,
+          hack with co-conspirators, solve a murder at midnight, and experience
+          the energy of being in-person again. Together, we’ll Assemble to form
+          the first IRL high school hackathon on this side of the pandemic.
+          <br />
+          <br />
+          We're so excited to meet you at Assemble this summer. Please fill out
+          the registration form below to help us make the event magical for you.
+          Feel free to contact{' '}
           <a href="mailto:assemble@hackclub.com">assemble@hackclub.com</a> for
           help!
         </Box>
@@ -100,7 +112,10 @@ Over the weekend, you’ll explore the Bay Area during your free time, hack with
             }
           }
           return (
-            <Box key={sectionIndex} sx={{ my: 5 }}>
+            <Box
+              key={sectionIndex}
+              sx={{ mb: sectionIndex == manifest.questions.length -1 ? 4 : 5, mt: sectionIndex == 0 ? 4 : 5 }}
+            >
               <Box sx={{ textAlign: 'left', mb: 2 }}>
                 <Text sx={{ color: 'red', fontSize: '27px', fontWeight: 800 }}>
                   {sectionItem['header']}
@@ -149,7 +164,13 @@ Over the weekend, you’ll explore the Bay Area during your free time, hack with
                             </Text>
                             {item.sublabel && (
                               <Text
-                                sx={{ fontSize: '15px', color: '#555', fontWeight: '500', mb: 2, fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif` }}
+                                sx={{
+                                  fontSize: '15px',
+                                  color: '#555',
+                                  fontWeight: '500',
+                                  mb: 2,
+                                  fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif`
+                                }}
                                 as="p"
                               >
                                 {item['sublabel']}
@@ -180,7 +201,10 @@ Over the weekend, you’ll explore the Bay Area during your free time, hack with
                           border: '1px solid',
                           borderColor: 'rgb(221, 225, 228)',
                           resize: 'vertical',
-                          display: item.inputType == 'checkbox' ? '-webkit-box' : 'block'
+                          display:
+                            item.inputType == 'checkbox'
+                              ? '-webkit-box'
+                              : 'block'
                         }}
                         {...(item.type == 'select'
                           ? item.options
@@ -225,18 +249,25 @@ Over the weekend, you’ll explore the Bay Area during your free time, hack with
             </Box>
           )
         })}
-        <Button onClick={() => {
-          console.log(data);
-          fetch('/api/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }).then(response => response.json()).then(({ success }) => success && window.location.replace('/success'));
-        }}>Submit</Button>
+        <Button
+          onClick={() => {
+            console.log(data)
+            fetch('/api/submit', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+              .then(response => response.json())
+              .then(
+                ({ success }) => success && window.location.replace('/success')
+              )
+          }}
+        >
+          Submit
+        </Button>
       </Card>
     </Container>
   )
 }
-

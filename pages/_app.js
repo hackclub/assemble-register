@@ -51,24 +51,6 @@ export default class App extends NextApp {
           >
             <Component {...pageProps} />
           </div>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            duration={2000}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'auto !important',
-              width: '100vw !important',
-              zIndex: -1
-            }}
-          >
-            <source src="https://stream.mux.com/dTJ01wpc7pKN84IZXzP02LipW6t00tr01U00sQJX00wuGSriE" />
-          </video>
         </div>
         <style>
           {`
