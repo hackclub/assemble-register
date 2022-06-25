@@ -7,7 +7,7 @@ import { ThemeProvider } from 'theme-ui'
 import ForceTheme from '../components/force-theme'
 import Flag from '../components/flag'
 import NProgress from '../components/nprogress'
-import Meta from '@hackclub/meta'
+import Meta from '../components/meta'
 import Head from 'next/head'
 
 export default class App extends NextApp {
