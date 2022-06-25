@@ -43,7 +43,9 @@ export default class App extends NextApp {
               zIndex: 1,
               height: '100vh',
               width: '100vw',
-              background: 'rgba(0,0,10, 0.8)',
+              backgroundImage: 'url("/msw-bg.png")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'bottom-left',
               overflowY: 'scroll'
             }}
           >
