@@ -89,13 +89,13 @@ export default function Register({ notFound, registrationRecord, params }) {
           <br />
           <br />
           We invite you to come out and join us. Not through Zoom or Discord,
-          but IRL out in the Golden City from August 5th 6:00pm to August 7th
+          but IRL out in the Bay Area from August 5th 6:00pm to August 7th
           12:00pm. We’ll be hosted at the fantastic Figma HQ on Market Street in
           the heart of San Francisco.
           <br />
           <br />
           Over the weekend, you’ll explore the Bay Area during your free time,
-          hack with co-conspirators, solve a murder at midnight, and experience
+          hack with co-conspirators and experience
           the energy of being in-person again. Together, we’ll Assemble to form
           the first IRL high school hackathon on this side of the pandemic.
           <br />
