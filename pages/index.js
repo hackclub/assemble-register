@@ -17,9 +17,12 @@ import {
 import Icon from '@hackclub/icons'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import manifest from '../lib/manifest.js'
+import { manifest, requiredList } from '../lib/manifest.js'
 import nookies from 'nookies'
 import { useRouter } from 'next/router'
+import { toast, ToastContainer } from 'react-nextjs-toast'
+
+console.log(requiredList);
 
 export default function Register({ notFound, registrationRecord, params }) {
   const [data, setData] = useState({})
@@ -33,6 +36,7 @@ export default function Register({ notFound, registrationRecord, params }) {
   }
   return (
     <Container py={4} variant="copy">
+      <ToastContainer align="right" />
       <Card
         px={[4, 4]}
         py={[3, 3]}
@@ -263,7 +267,7 @@ export default function Register({ notFound, registrationRecord, params }) {
             })
               .then(response => response.json())
               .then(
-                ({ success }) => success && window.location.replace('/success')
+                ({ success, error }) => success ? window.location.replace('/success') : toast.notify(error, { type: 'error', duration: 60 })
               )
           }}
         >
