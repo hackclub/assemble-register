@@ -17,10 +17,10 @@ export default class App extends NextApp {
       <ThemeProvider theme={theme}>
         <Meta
           as={Head}
-          name="Assemble" // site name
-          title="Assemble" // page title
+          name="Join Us At Assemble!" // site name
+          title="Join Us At Assemble!" // page title
           description="" // page description
-          image="https://apply.hackclub.com/card_1.png" // large summary card image URL
+          image="https://cloud-bs04w09ot-hack-club-bot.vercel.app/0image.png" // large summary card image URL
           color="#ec3750" // theme color
         />
         <Flag />
@@ -51,24 +51,6 @@ export default class App extends NextApp {
           >
             <Component {...pageProps} />
           </div>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            duration={2000}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'auto !important',
-              width: '100vw !important',
-              zIndex: -1
-            }}
-          >
-            <source src="https://stream.mux.com/dTJ01wpc7pKN84IZXzP02LipW6t00tr01U00sQJX00wuGSriE" />
-          </video>
         </div>
         <style>
           {`
