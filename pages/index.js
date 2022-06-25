@@ -26,6 +26,7 @@ console.log(requiredList);
 
 export default function Register({ notFound, registrationRecord, params }) {
   const [data, setData] = useState({})
+  const [disabled, setDisabled] = useState(false);
 
   let keys = manifest.questions.flatMap(x => x.items.map(y => y.key))
 
@@ -257,6 +258,8 @@ export default function Register({ notFound, registrationRecord, params }) {
         })}
         <Button
           onClick={() => {
+            setDisabled(true);
+            toast.notify('Submitting your registration...', { duration: 60, title: 'Working...' })
             console.log(data)
             fetch('/api/submit', {
               method: 'POST',
@@ -267,9 +270,16 @@ export default function Register({ notFound, registrationRecord, params }) {
             })
               .then(response => response.json())
               .then(
-                ({ success, error }) => success ? window.location.replace('/success') : toast.notify(error, { type: 'error', duration: 60 })
+                ({ success, error }) => {
+                  setDisabled(false);
+                  success ? window.location.replace('/success') : toast.notify(error, { type: 'error', title: 'Oops!', duration: 60 })
+                }
               )
           }}
+          style={{
+            filter: disabled ? 'grayscale(1)' : 'grayscale(0)',
+          }}
+          disabled={disabled}
         >
           Submit
         </Button>
