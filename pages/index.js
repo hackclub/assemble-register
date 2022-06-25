@@ -67,7 +67,7 @@ export default function Register({ notFound, registrationRecord, params }) {
               >
                 Assemble
               </Text>
-              2022!
+              !
             </Text>
           </Flex>
           <Box
