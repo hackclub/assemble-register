@@ -20,7 +20,7 @@ export default class App extends NextApp {
           name="Join Us At Assemble 2022!" // site name
           title="Join Us At Assemble 2022!" // page title
           description="" // page description
-          image="https://apply.hackclub.com/card_1.png" // large summary card image URL
+          image="https://cloud-bs04w09ot-hack-club-bot.vercel.app/0image.png" // large summary card image URL
           color="#ec3750" // theme color
         />
         <Flag />
