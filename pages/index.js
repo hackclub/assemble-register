@@ -61,7 +61,7 @@ export default function Register({ notFound, registrationRecord, params }) {
               }}
               as="div"
             >
-              Join Us At{' '}
+              Join Hack Club At{' '}
               <Text
                 sx={{
                   textDecoration: 'none',
