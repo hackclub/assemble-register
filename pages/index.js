@@ -92,7 +92,7 @@ export default function Register({ notFound, registrationRecord, params }) {
           👋 Hey there! You may notice this form has switched over to being
           a waitlist. The event is currently over-subscribed, however, we expect
           places to arise and will be offering these places on a first-come-first-serve
-          basis (you'll be notified via email on the Monday of the hackathon).
+          basis (you'll be notified via email on the Monday before the hackathon).
         </Box>
         <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
           This summer, we’re going to return in-person high-school hackathons to
