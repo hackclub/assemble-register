@@ -33,7 +33,7 @@ export default function Register({ notFound, registrationRecord, params }) {
         </Text>
         <br />
         <Text>
-          ❤️ We're really excited to meet you! Make sure you check your email in
+          ❤️ You're on the waitlist! We really hope we can meet you! Make sure you check your email in
           the coming days and weeks for important updates. Also, check out the{' '}
           <Text
             as={'a'}
