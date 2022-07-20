@@ -61,7 +61,7 @@ export default function Register({ notFound, registrationRecord, params }) {
               }}
               as="div"
             >
-              Join Hack Club At{' '}
+              Join The Waitlist For{' '}
               <Text
                 sx={{
                   textDecoration: 'none',
@@ -88,6 +88,12 @@ export default function Register({ notFound, registrationRecord, params }) {
         </Box>
       </Card>
       <Card px={[4, 4]} py={[4, 4]} mt={4}>
+        <Box bg="red" p={3} mb={3} sx={{ borderRadius: 3, color: 'white' }}>
+          👋 Hey there! You may notice this form has switched over to being
+          a waitlist. The event is currently over-subscribed, however, we expect
+          places to arise and will be offering these places on a first-come-first-serve
+          basis (you'll be notified via email on the Monday of the hackathon).
+        </Box>
         <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
           This summer, we’re going to return in-person high-school hackathons to
           San Francisco. Our goal is to kick off a new renaissance.
