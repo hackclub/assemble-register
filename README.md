@@ -15,4 +15,4 @@ cd www-assemble-register
 yarn && yarn run dev
 ```
 
-4. It should now be running, open [localhost:3000](http://localhost:3000) to view it
+3. Open [localhost:3000](http://localhost:3000) to view it
