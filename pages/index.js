@@ -89,7 +89,7 @@ export default function Register({ notFound, registrationRecord, params }) {
         <Box bg="red" p={3} mb={3} sx={{ borderRadius: 3, color: 'white' }}>
           👋 Hey there! Thanks for checking out Assemble. The weekend of August 5th
           2022 was magical. Its spirit now lives on in high school hackathons 
-          around the world, <a href="https://hackathons.hackclub.com">join them here</a>.
+          around the world, <a href="https://hackathons.hackclub.com" style={{color: 'white'}}>join them here</a>.
         </Box>
         <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
           This summer, we’re going to return in-person high-school hackathons to
