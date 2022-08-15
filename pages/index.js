@@ -22,8 +22,6 @@ import nookies from 'nookies'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-nextjs-toast'
 
-console.log(requiredList);
-
 export default function Register({ notFound, registrationRecord, params }) {
   const [data, setData] = useState({})
   const [disabled, setDisabled] = useState(false);
@@ -89,10 +87,9 @@ export default function Register({ notFound, registrationRecord, params }) {
       </Card>
       <Card px={[4, 4]} py={[4, 4]} mt={4}>
         <Box bg="red" p={3} mb={3} sx={{ borderRadius: 3, color: 'white' }}>
-          👋 Hey there! You may notice this form has switched over to being
-          a waitlist. The event is currently over-subscribed, however, we expect
-          places to arise and will be offering these places on a first-come-first-serve
-          basis (you'll be notified via email on the Monday before the hackathon).
+          👋 Hey there! Thanks for checking out Assemble. The weekend of August 5th
+          2022 was magical. Its spirit now lives on in high school hackathons 
+          around the world, <a href="https://hackathons.hackclub.com">join them here</a>.
         </Box>
         <Box bg="sunken" p={3} mb={3} sx={{ borderRadius: 3 }}>
           This summer, we’re going to return in-person high-school hackathons to
@@ -283,9 +280,9 @@ export default function Register({ notFound, registrationRecord, params }) {
               )
           }}
           style={{
-            filter: disabled ? 'grayscale(1)' : 'grayscale(0)',
+            filter: true ? 'grayscale(1)' : 'grayscale(0)',
           }}
-          disabled={disabled}
+          disabled={true}
         >
           Submit
         </Button>
