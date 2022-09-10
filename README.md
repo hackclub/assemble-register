@@ -37,24 +37,24 @@ npm run dev
 ```
 
 ## Manifest
-Manifest is composed of an array called questions with each element inside the array representing a section of the form.<br/>
-`header` **string** is the header that is displayed at the top of the section.<br/>
-`items` **Array\<Question\>** is an array that contains the questions.<br/>
+Manifest is composed of an array called questions with each element inside the array representing a section of the form.  
+`header` **string** is the header that is displayed at the top of the section.  
+`items` **Array\<Question\>** is an array that contains the questions.  
 
 #### Questions
 `key` **string** REQUIRED must match the name of an Airtable column in `Registrations`<br/>
 ![image](https://user-images.githubusercontent.com/66806100/184732849-8c2baa61-c9a5-4416-b38e-03867dd2975d.png)
-`label` **string** is what is shown to the user<br/>
-`sublabel` **string** is a secondary label/description of the field<br/>
-`type` **string** REQUIRED determines what type of input field the user will see.<br/>
-    `string` input__
-    `paragraph` textarea<br/>
-    `checkbox` checkbox<br/>
-    `select` select<br/>
-`inputType` **string** specifies validation with `type=VALUE`<br/>
-    `email` email validation__
-`placeholder` **string** is a placeholder<br/>
-`options` **Array\<string\>** is used when `select` is specified as a input type<br/>
-`optional` **boolean** determines if the input field is optional<br/>
-`check` **function(data)**<br/>
+`label` **string** is what is shown to the user  
+`sublabel` **string** is a secondary label/description of the field  
+`type` **string** REQUIRED determines what type of input field the user will see.  
+    `string` input  
+    `paragraph` textarea  
+    `checkbox` checkbox  
+    `select` select  
+`inputType` **string** specifies validation with `type=VALUE`  
+    `email` email validation  
+`placeholder` **string** is a placeholder  
+`options` **Array\<string\>** is used when `select` is specified as a input type  
+`optional` **boolean** determines if the input field is optional  
+`check` **function(data)**  
     `data` is an object that contains all the other question values. Ex. data\["Travel Stipends"\] pulls the value of the question with "Travel Stipends" as the `key`.
