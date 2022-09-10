@@ -24,7 +24,7 @@ Add a `.env` file with your AirTable API key. [How do I get my API key?](https:/
 Locate `lib/airtable.js` and change the `registrationsAirtable` baseID to your Airtable base ID, which is found in your Airtable URL and usually starts with `app`.
 
 5. Add necessary fields to Airtable
-Create a new table called `Registrations`.<br/>
+Create a new table called `Registrations`.  
 Add fields/columns with names that match up with the `key` value for each question in `manifest.json`. Make sure the column type matches up with question type in `manifest.json`
 
 6. Run
