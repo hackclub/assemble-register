@@ -24,7 +24,7 @@ Add a `.env` file with your AirTable API key. [How do I get my API key?](https:/
 Locate `lib/airtable.js` and change the `registrationsAirtable` baseID to your Airtable base ID, which is found in your Airtable URL and usually starts with `app`.
 
 5. Add necessary fields to Airtable
-Create a new table called `Registrations`.__
+Create a new table called `Registrations`.  
 Add fields/columns with names that match up with the `key` value for each question in `manifest.json`. Make sure the column type matches up with question type in `manifest.json`
 
 6. Run
@@ -37,24 +37,24 @@ npm run dev
 ```
 
 ## Manifest
-Manifest is composed of an array called questions with each element inside the array representing a section of the form.__
-`header` **string** is the header that is displayed at the top of the section.__
-`items` **Array\<Question\>** is an array that contains the questions.__
+Manifest is composed of an array called questions with each element inside the array representing a section of the form.  
+`header` **string** is the header that is displayed at the top of the section.  
+`items` **Array\<Question\>** is an array that contains the questions.  
 
 #### Questions
-`key` **string** REQUIRED must match the name of an Airtable column in `Registrations`__
+`key` **string** REQUIRED must match the name of an Airtable column in `Registrations`<br/>
 ![image](https://user-images.githubusercontent.com/66806100/184732849-8c2baa61-c9a5-4416-b38e-03867dd2975d.png)
-`label` **string** is what is shown to the user__
-`sublabel` **string** is a secondary label/description of the field__
-`type` **string** REQUIRED determines what type of input field the user will see.__
-    `string` input__
-    `paragraph` textarea__
-    `checkbox` checkbox__
-    `select` select__
-`inputType` **string** specifies validation with `type=VALUE`__
-    `email` email validation__
-`placeholder` **string** is a placeholder__
-`options` **Array\<string\>** is used when `select` is specified as a input type__
-`optional` **boolean** determines if the input field is optional__
-`check` **function(data)**__
+`label` **string** is what is shown to the user  
+`sublabel` **string** is a secondary label/description of the field  
+`type` **string** REQUIRED determines what type of input field the user will see.  
+    `string` input  
+    `paragraph` textarea  
+    `checkbox` checkbox  
+    `select` select  
+`inputType` **string** specifies validation with `type=VALUE`  
+    `email` email validation  
+`placeholder` **string** is a placeholder  
+`options` **Array\<string\>** is used when `select` is specified as a input type  
+`optional` **boolean** determines if the input field is optional  
+`check` **function(data)**  
     `data` is an object that contains all the other question values. Ex. data\["Travel Stipends"\] pulls the value of the question with "Travel Stipends" as the `key`.
