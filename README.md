@@ -20,10 +20,13 @@ npm install
 Locate `lib/manifest.json` and edit/add/remove questions to your liking. For more information about `manifest.json`, click [here](https://github.com/hackclub/www-assemble-register#manifest)
 
 4. Add environment variables and customize
-Add a `.env` file with your AirTable API key. [How do I get my API key?](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
+Add a `.env` file with your AirTable API key set to the variable `AIRTABLE`. [How do I get my API key?](https://support.airtable.com/hc/en-us/articles/219046777-How-do-I-get-my-API-key-)
 Locate `lib/airtable.js` and change the `registrationsAirtable` baseID to your Airtable base ID, which is found in your Airtable URL and usually starts with `app`.
 
-5. Add necessary fields to Airtable
+5. Enable submissions
+Locate `pages/index.js` and set `disabled={false}` for the last `<Button>` element on the page.
+
+6. Add necessary fields to Airtable
 Create a new table called `Registrations`.  
 Add fields/columns with names that match up with the `key` value for each question in `manifest.json`. Make sure the column type matches up with question type in `manifest.json`
 
